@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_194511) do
+ActiveRecord::Schema.define(version: 2021_11_15_213529) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_194511) do
 
   create_table "book_in_orders", force: :cascade do |t|
     t.decimal "sold_price"
-    t.decimal "amount"
+    t.integer "amount"
     t.integer "order_id", null: false
     t.integer "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
