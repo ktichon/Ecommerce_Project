@@ -5,7 +5,7 @@ ActiveAdmin.register Book do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :cost, :author_id
+  permit_params :name, :description, :cost, :author_id, :image
   #
   # or
   #
@@ -14,5 +14,13 @@ ActiveAdmin.register Book do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  form do |f|
+    f.semantic_errors
+    f.inputs
+    f.inputs do
+      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image) : ""
+    end
+    f.actions
+  end
 
 end

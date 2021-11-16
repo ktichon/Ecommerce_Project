@@ -1,5 +1,11 @@
 <div class="book">
   <h5><%= link_to book.name, book %></h5>
+  <% if book.image.present? %>
+    <figure class="image">
+          <%= image_tag book.image %>
+  </figure>
+  <% end %>
+
   <p class="text-right">by <%= link_to book.author.name, book.author %></p>
   <p><%= number_to_currency book.cost %></p>
   <p>

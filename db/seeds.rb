@@ -50,7 +50,8 @@ NUMBER_OF_AUTHORS.times do
   author = Author.create(name: authorName, info: info)
   numberOfBooksWritten.times do
     Faker::Quote.unique.clear
-    booktitle = "#{Faker::Book.unique.title} on #{Faker::TvShows::StarTrek.location} "
+    realBookTitle = Faker::Book.unique.title
+    booktitle = "#{realBookTitle} on #{Faker::TvShows::StarTrek.location} "
     description = %Q[ Critics have this to say about #{authorName} 's newest work: \n"#{Faker::Quote.unique.famous_last_words}" - #{Faker::Company.unique.name}\n"#{Faker::Quote.unique.famous_last_words}" - #{Faker::Company.unique.name}\n"#{Faker::Quote.unique.famous_last_words}" - #{Faker::Company.unique.name}]
     newBook = author.books.create(name: booktitle, description: description, cost: Faker::Number.decimal(l_digits: 2) )
     numberOfGenre = genre_odds.sample
@@ -59,6 +60,13 @@ NUMBER_OF_AUTHORS.times do
       genre = Genre.find_or_create_by(genre_name: category_array.sample)
       BookGenre.create(book: newBook, genre: genre)
     end
+
+    query = URI.encode_www_form_component(realBookTitle)
+    downloaded_image = URI.open("https://source.unsplash.com/300x300/?#{query}")
+    newBook.image.attach(io: downloaded_image, filename: "m-#{booktitle}.jpg")
+    sleep 0.1
+
+
   end
 end
 #AdminUser.create!(email: 'notadmin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
