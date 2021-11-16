@@ -11,7 +11,8 @@
   </head>
 
   <body>
-   <%= render partial: 'common/menu'%>
+    <h1><%= yield(:title) %></h1>
+    <%= render partial: 'common/menu'%>
     <%= yield %>
   </body>
 </html>

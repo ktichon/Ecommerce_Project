@@ -1,10 +1,10 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.includes(:author).order(:name).page(params[:page])
+    @books = Book.includes(:author).includes(:genres).order(:name).page(params[:page])
   end
 
   def show
-    @books = Book.find(params[:id])
+    @book = Book.find(params[:id])
   end
 
   def search

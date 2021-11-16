@@ -1,2 +1,5 @@
-<h1>Authors#show</h1>
-<p>Find me in app/views/authors/show.html.erb</p>
+<% content_for :title, @author.name %>
+<p><%= @author.info %> </p>
+<h3>Books</h3>
+<%= render partial: @author.books%>
+

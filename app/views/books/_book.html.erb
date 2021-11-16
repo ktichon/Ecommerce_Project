@@ -1,5 +1,5 @@
 <div class="book">
   <h5><%= link_to book.name, book %></h5>
-  <p class="text-right">by <%= book.author.name%> </p>
+  <p class="text-right">by <%= link_to book.author.name, book.author %></p>
   <p><%= number_to_currency book.cost %></p>
 </div>

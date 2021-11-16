@@ -43,7 +43,7 @@ NUMBER_OF_AUTHORS.times do
   numberOfBooksWritten.times do
     Faker::Quote.unique.clear
     booktitle = "#{Faker::Book.unique.title} on #{Faker::TvShows::StarTrek.location} "
-    description = %Q[ Critics have this to say about #{authorName} 's newst work: \n"#{Faker::Quote.unique.famous_last_words}"\n "#{Faker::Quote.unique.famous_last_words}"\n "#{Faker::Quote.unique.famous_last_words}"]
+    description = %Q[ Critics have this to say about #{authorName} 's newest work: \n"#{Faker::Quote.unique.famous_last_words}"\n "#{Faker::Quote.unique.famous_last_words}"\n "#{Faker::Quote.unique.famous_last_words}"]
     newBook = author.books.create(name: booktitle, description: description, cost: Faker::Number.decimal(l_digits: 2) )
     numberOfGenre = genre_odds.sample
 

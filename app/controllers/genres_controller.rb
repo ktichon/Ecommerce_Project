@@ -3,7 +3,7 @@ class GenresController < ApplicationController
   end
 
   def index
-    @genres = Genre.all
+    @genres = Genre.includes(:books).all
 
 
   end

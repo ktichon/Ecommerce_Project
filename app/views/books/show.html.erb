@@ -1,2 +1,9 @@
-<h1>Books</h1>
-<%= render @books%>
+<% content_for :title, @book.name %>
+<%= render @book%>
+<h3>Genre(s)</h3>
+<p><%= simple_format(@book.description) %> </p>
+<ul>
+  <% @book.genres.each do |genre| %>
+    <li><%= link_to genre.name, genre%> </li>
+  <% end %>
+</ul>
