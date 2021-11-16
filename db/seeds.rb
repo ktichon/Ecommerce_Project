@@ -17,7 +17,7 @@ Genre.delete_all
 Faker::UniqueGenerator.clear
 
 NUMBER_OF_AUTHORS = 70
-bookArray = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,4,11]
+bookArray = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,4,11]
 NUMBER_OF_CATEGORIES = 10
 category_array = []
 genre_odds = [1,1,1,2]
@@ -30,25 +30,33 @@ NUMBER_OF_AUTHORS.times do
   authorName = ""
   begin
     if numberOfBooksWritten == 1
-      authorName = Faker::Movies::StarWars.unique.character
-    else
       authorName = Faker::TvShows::StarTrek.unique.character
+    elsif numberOfBooksWritten == 2
+      authorName = Faker::Games::Fallout.unique.character
+    elsif numberOfBooksWritten == 3
+      authorName = Faker::Movies::PrincessBride.unique.character
+    elsif  numberOfBooksWritten == 4
+      authorName = Faker::Games::SuperSmashBros.unique.fighter
+    else
+      authorName = Faker::Movies::StarWars.unique.character
     end
+
   rescue => exception
-    authorName = Faker::Games::Fallout.unique.character
+    authorName = Faker::TvShows::BojackHorseman.unique.character
   end
 
-  info = "lives in #{Faker::Games::Pokemon.location} with their #{rand(10) + 1} #{Faker::Creature::Animal.name}"
+
+  info = "#{authorName} lives in #{Faker::Games::Pokemon.location} with their #{rand(10) + 1} #{Faker::Creature::Animal.name}"
   author = Author.create(name: authorName, info: info)
   numberOfBooksWritten.times do
     Faker::Quote.unique.clear
     booktitle = "#{Faker::Book.unique.title} on #{Faker::TvShows::StarTrek.location} "
-    description = %Q[ Critics have this to say about #{authorName} 's newest work: \n"#{Faker::Quote.unique.famous_last_words}"\n "#{Faker::Quote.unique.famous_last_words}"\n "#{Faker::Quote.unique.famous_last_words}"]
+    description = %Q[ Critics have this to say about #{authorName} 's newest work: \n"#{Faker::Quote.unique.famous_last_words}" - #{Faker::Company.unique.name}\n"#{Faker::Quote.unique.famous_last_words}" - #{Faker::Company.unique.name}\n"#{Faker::Quote.unique.famous_last_words}" - #{Faker::Company.unique.name}]
     newBook = author.books.create(name: booktitle, description: description, cost: Faker::Number.decimal(l_digits: 2) )
     numberOfGenre = genre_odds.sample
 
     numberOfGenre.times do
-      genre = Genre.find_or_create_by(name:category_array.sample)
+      genre = Genre.find_or_create_by(genre_name: category_array.sample)
       BookGenre.create(book: newBook, genre: genre)
     end
   end

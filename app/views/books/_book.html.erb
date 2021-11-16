@@ -2,4 +2,10 @@
   <h5><%= link_to book.name, book %></h5>
   <p class="text-right">by <%= link_to book.author.name, book.author %></p>
   <p><%= number_to_currency book.cost %></p>
+  <p>
+    <% book.genres.each do |genre| %>
+      <%= link_to genre.genre_name, genre%>
+      <%= " "%>
+    <% end %>
+  </p>
 </div>

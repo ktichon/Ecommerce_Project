@@ -2,3 +2,8 @@
   <li><%= link_to "Book", books_path%> </li>
   <li><%= link_to "Genres", genres_path%> </li>
 </ul>
+<%= form_with(url:search_books_path, method: :get, local: true) do %>
+    <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Search for Books") %>
+    <%= select_tag :type, options_for_select(@searchGenreOptions) %>
+    <%= submit_tag("Search", class: "button is-primary")%>
+<% end %>

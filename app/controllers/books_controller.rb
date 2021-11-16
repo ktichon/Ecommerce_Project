@@ -8,6 +8,14 @@ class BooksController < ApplicationController
   end
 
   def search
-    @books = Book.includes(:author).includes(:genre).all
+    @keywords = params[:keywords]
+    @genre = params[:type]
+    wildcardSearch = "%#{@keywords}%"
+    books = Book.includes(:author).includes(:genres).where("name LIKE ? ", wildcardSearch)
+    if  params[:type] != "All"
+      genres = Genre.find_by(genre_name: @genre)
+      books = books.joins(:book_genres).where("books.id = book_genres.book_id").where("book_genres.genre_id = ?", genres.id)
+    end
+    @books = books.order(:name).page(params[:page])
   end
 end

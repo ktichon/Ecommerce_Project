@@ -1,7 +1,4 @@
 class GenresController < ApplicationController
-  def search
-  end
-
   def index
     @genres = Genre.includes(:books).all
 
