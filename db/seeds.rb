@@ -61,6 +61,7 @@ NUMBER_OF_AUTHORS.times do
     end
   end
 end
+#AdminUser.create!(email: 'notadmin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 puts "Created #{Genre.count} genres"
 puts "Created #{Author.count} authors"
 puts "Created #{Book.count} books"
@@ -73,3 +74,4 @@ puts "Created #{Book.count} books"
 
 
 
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
