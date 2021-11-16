@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.includes(:author).all
+    @books = Book.includes(:author).order(:name).page(params[:page])
   end
 
   def show
@@ -8,6 +8,6 @@ class BooksController < ApplicationController
   end
 
   def search
-    @books = Book.includes(:author)..includes(:genre).all
+    @books = Book.includes(:author).includes(:genre).all
   end
 end
