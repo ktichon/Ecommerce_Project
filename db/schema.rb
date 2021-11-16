@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_213529) do
+ActiveRecord::Schema.define(version: 2021_11_16_010814) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 2021_11_15_213529) do
   create_table "customers", force: :cascade do |t|
     t.string "address"
     t.string "postal_code"
-    t.integer "provence_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["provence_id"], name: "index_customers_on_provence_id"
+    t.integer "province_id"
+    t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -89,6 +89,6 @@ ActiveRecord::Schema.define(version: 2021_11_15_213529) do
   add_foreign_key "book_in_orders", "books"
   add_foreign_key "book_in_orders", "orders"
   add_foreign_key "books", "authors"
-  add_foreign_key "customers", "provences"
+  add_foreign_key "customers", "provinces"
   add_foreign_key "orders", "customers"
 end

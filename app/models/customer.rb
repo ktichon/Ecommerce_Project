@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
-  belongs_to :provence
+  belongs_to :province
   has_many :orders
   validates :address, presence: true
-  validates :postal_code, zipcode: { country_code_attribute: :postal_code }
+  validates_zipcode :postal_code
 
 end
