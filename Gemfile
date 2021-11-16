@@ -61,5 +61,7 @@ gem 'devise'
 
 gem 'validates_zipcode'
 
-
+gem 'kaminari', :git => 'https://github.com/kaminari/kaminari.git', :branch => 'master'
+gem 'bootstrap', :git => 'https://github.com/twbs/bootstrap-rubygem.git', :branch => 'master'
+gem 'jquery-rails'
 gem'image_processing'

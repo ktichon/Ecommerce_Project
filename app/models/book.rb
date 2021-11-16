@@ -5,4 +5,5 @@ class Book < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :cost, presence: true, numericality: { greater_than_or_equal_to: 0}
+  paginates_per 50
 end
