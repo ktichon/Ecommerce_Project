@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'pages/show'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'books/index'
@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   resources :genres, only: [:index, :show]
   resources :authors, only: [:index, :show]
   resources :cart, only: [:create, :destroy]
+
+  get "pages/:permalink" => "pages#permalink", as: "permalink"
+
   root to: "books#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
