@@ -1,3 +1,10 @@
 <% content_for :title, @book.name %>
+<%= debug cart %>
 <%= render @book%>
 <p><%= simple_format(@book.description) %> </p>
+<%= form_with  url: cart_index_path, method: :post do %>
+  <%= hidden_field_tag(:id, @book.id) %>
+  <%= label(:amount, "#")%>
+  <%= number_field(:amount, 1, {min: 1, max: 99})  %>
+  <%= button_tag 'Add to Cart' %>
+<% end %>
