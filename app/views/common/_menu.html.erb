@@ -10,3 +10,17 @@
     <%= select_tag :type, options_for_select(@searchGenreOptions) %>
     <%= submit_tag("Search", class: "button is-primary")%>
 <% end %>
+<nav>
+  <ul>
+    <li>Cart Total: <%= number_to_currency cart[0] %>
+      <% if cart.present? %>
+      <ul>
+        <% cart[1].each do |bookInCart| %>
+          <li> <%= bookInCart[1]%> x  <%= link_to bookInCart[0].name,  bookInCart[0] %></li>
+        <% end %>
+
+      </ul>
+      <% end %>
+    </li>
+  </ul>
+</nav>

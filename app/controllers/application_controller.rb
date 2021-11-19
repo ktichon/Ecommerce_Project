@@ -17,10 +17,16 @@ class ApplicationController < ActionController::Base
   def info_pages
     InfoPage.all
   end
-
-
-
   def cart
-    Book.find(session[:shopping_cart].keys)
+    current_cart = []
+    total = 0
+    session[:shopping_cart].each do |key, value|
+      current_book = Book.find(key)
+      current_cart << [current_book, value]
+      total += current_book.cost * value
+    end
+    return total, current_cart
+
+    #Book.find(session[:shopping_cart].keys)
   end
 end

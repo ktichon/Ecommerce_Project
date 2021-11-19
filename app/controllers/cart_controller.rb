@@ -1,13 +1,15 @@
 class CartController < ApplicationController
 
   def create
-    book_id = params[:id].to_i
+    book_id = params[:id]
     book_quantity = params[:amount][0].to_i
     newItem = true
     if !session[:shopping_cart].key?(book_id)
-      session[:shopping_cart][book_id] = 0
+      session[:shopping_cart][book_id] = book_quantity
+    else
+      session[:shopping_cart][book_id] += book_quantity
     end
-    session[:shopping_cart][book_id] += book_quantity
+
     # if session[:shopping_cart].any? {|book| book['id'] == book_id}
     #   book[:amount] += book_quantity
     # else
