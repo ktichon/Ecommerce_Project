@@ -13,9 +13,18 @@ BookGenre.delete_all
 Book.delete_all
 Author.delete_all
 Genre.delete_all
+ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
+
+
+file_name = Rails.root.join("db/ProvincesCSV.csv")
+puts "Loading Provinces from CSV file: #{file_name}"
+csv_data = File.read(file_name)
+province_list = CSV.parse(csv_data, headers: true, encoding: "utf-8")
+province_list.each do |province|
+  Province.create(name: province["name"], abbrev: province["abbrev"], PST: province["PST"], GST: province["GST"], HST: province["HST"])
+end
 
 Faker::UniqueGenerator.clear
-
 NUMBER_OF_AUTHORS = 70
 bookArray = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,4,11]
 NUMBER_OF_CATEGORIES = 10
@@ -70,16 +79,7 @@ NUMBER_OF_AUTHORS.times do
   end
 end
 #AdminUser.create!(email: 'notadmin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+puts "Created #{Province.count} provinces"
 puts "Created #{Genre.count} genres"
 puts "Created #{Author.count} authors"
 puts "Created #{Book.count} books"
-
-
-
-
-
-
-
-
-
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

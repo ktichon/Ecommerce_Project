@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_16_224412) do
+ActiveRecord::Schema.define(version: 2021_11_19_155911) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_11_16_224412) do
     t.integer "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "PST"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
@@ -136,6 +137,7 @@ ActiveRecord::Schema.define(version: 2021_11_16_224412) do
     t.decimal "HST"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "GST"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
