@@ -2,11 +2,13 @@ class CartController < ApplicationController
 
   def create
     book_id = params[:id]
-    book_quantity = params[:amount][0].to_i
+    book_quantity = params[:amount].to_i
     newItem = true
     if !session[:shopping_cart].key?(book_id)
       session[:shopping_cart][book_id] = book_quantity
     else
+      Rails.logger.debug("Book Amount Param: #{params[:amount][0]}")
+
       session[:shopping_cart][book_id] += book_quantity
     end
 

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :authors, only: [:index, :show]
   resources :cart, only: [:create, :destroy]
 
+  get "/cart", to: "cart#index"
+
   get "info_pages/:permalink" => "info_pages#permalink", as: "permalink"
 
   root to: "books#index"
