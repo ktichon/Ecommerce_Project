@@ -4,6 +4,5 @@
 <%= form_with  url: cart_index_path, method: :post do %>
   <%= hidden_field_tag(:id, @book.id) %>
   <%= label(:amount, "#")%>
-  <%= number_field(:amount, nil, {min: 1, max: 99})  %>
-  <%= button_tag 'Add to Cart' %>
+  <%=button_tag(name: 'amount', type: 'submit', value: 1)%>
 <% end %>
