@@ -1,0 +1,17 @@
+<% content_for :title, "Cart" %>
+<% if flash[:notice] %>
+      <p><%= flash[:notice] %></p>
+    <% end %>
+<% cart[1].each do |bookInCart| %>
+  <%= form_with  url: cart_index_path, method: :post do %>
+    <%= hidden_field_tag(:id, bookInCart[0].id) %>
+    <%= label(nil, "#{link_to bookInCart[0].name, bookInCart[0] }") %>
+    <% if bookInCart[1] > 1 %>
+      <%=button_tag(name: 'amount', type: 'submit', value: -1)%>
+    <% end %>
+    <%= label(nil, bookInCart[1])%>
+
+    <%=button_tag(name: 'amount', type: 'submit', value: 1)%>
+  <% end %>
+ <p><%= link_to '➖', cart_path(bookInCart[0]), method: :delete %></p>
+<% end %>

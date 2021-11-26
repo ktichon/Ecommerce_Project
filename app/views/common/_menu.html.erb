@@ -12,8 +12,9 @@
 <% end %>
 <nav>
   <ul>
-    <li>Cart Total: <%= number_to_currency cart[0] %>
+    <li><%= link_to "Cart Total: #{number_to_currency cart[0]}", cart_index_path %>
       <% if cart.present? %>
+      <sup><%= cart[1].size %></sup>
       <ul>
         <% cart[1].each do |bookInCart| %>
           <li> <%= bookInCart[1]%> x  <%= link_to bookInCart[0].name,  bookInCart[0] %></li>

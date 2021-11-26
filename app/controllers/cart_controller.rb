@@ -2,8 +2,7 @@ class CartController < ApplicationController
 
   def create
     book_id = params[:id]
-    book_quantity = params[:amount][0].to_i
-    newItem = true
+    book_quantity = params[:amount].to_i
     if !session[:shopping_cart].key?(book_id)
       session[:shopping_cart][book_id] = book_quantity
     else
@@ -27,7 +26,13 @@ class CartController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  # DELETE /cart/:id
   def destroy
 
+    id = params[:id]
+    session[:shopping_cart].delete(id)
+    book = Book.find(id)
+    flash[:notice] = "➖ #{book.name} removed from cart."
+    redirect_back fallback_location: root_path
   end
 end
