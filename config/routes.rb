@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
   resources :genres, only: [:index, :show]
   resources :authors, only: [:index, :show]
-  resources :cart, only: [:create, :destroy]
+  resources :cart, only: [:create, :update, :destroy]
 
   get "/cart", to: "cart#index"
 

@@ -23,9 +23,19 @@ class CartController < ApplicationController
     #     item['amount'] += book_quantity
     #   end
     # end
-
-
     redirect_back fallback_location: root_path
+  end
+
+  def update
+    book_id = params[:id]
+    book_quantity = params[:amount].to_i
+
+    session[:shopping_cart][book_id] = book_quantity
+
+    book = Book.find(book_id)
+    flash[:notice] = "➖ #{book.name} updated in cart."
+    redirect_back fallback_location: root_path
+
   end
 
   # DELETE /cart/:id

@@ -6,3 +6,9 @@
   <%= label(:amount, "#")%>
   <%=button_tag(name: 'amount', type: 'submit', value: 1)%>
 <% end %>
+<%= form_with url: cart_index_path, method: :post  do |f| %>
+  <%= f.hidden_field :id, value: @book.id%>
+  <%= f.label :amount, "#" %>
+  <%= f.number_field :amount, value: 1, in: 1..100, step: 1  %>
+  <%= f.submit 'Add to Cart' %>
+<% end %>
