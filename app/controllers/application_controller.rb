@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_up_search
   before_action :set_up_cart
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   helper_method :cart
   helper_method :info_pages
 
@@ -17,6 +19,8 @@ class ApplicationController < ActionController::Base
   def info_pages
     InfoPage.all
   end
+
+
   def cart
     current_cart = []
     total = 0
@@ -28,5 +32,10 @@ class ApplicationController < ActionController::Base
     return total, current_cart
 
     #Book.find(session[:shopping_cart].keys)
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:province_id, :address, :postal])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:province_id, :address, :postal])
   end
 end
