@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-    @books = Book.includes(:author).includes(:genres).order(:name).page(params[:page])
+    @books = Book.includes(:author).includes(:genres).includes(image_blob: { attachments: :blob }).order(:name).page(params[:page])
   end
 
   def show
