@@ -8,6 +8,8 @@ class CartController < ApplicationController
     else
       session[:shopping_cart][book_id] += book_quantity
     end
+    book = Book.find(book_id)
+    flash[:notice] = "➖ #{book.name} added to cart."
 
     # if session[:shopping_cart].any? {|book| book['id'] == book_id}
     #   book[:amount] += book_quantity

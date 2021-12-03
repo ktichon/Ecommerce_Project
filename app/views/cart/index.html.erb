@@ -1,7 +1,5 @@
 <% content_for :title, "Cart" %>
-<% if flash[:notice] %>
-      <p><%= flash[:notice] %></p>
-    <% end %>
+
 <% cart[1].each do |bookInCart| %>
   <%= form_with  url: cart_index_path, method: :post do %>
     <%= hidden_field_tag(:id, bookInCart[0].id) %>
