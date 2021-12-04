@@ -10,3 +10,9 @@
   <% end %>
  <p><%= link_to 'Remove', cart_path(bookInCart[0]), method: :delete %></p>
 <% end %>
+<% if cart[1].size > 0 %>
+  <%= button_to "BUTTON: link version", checkout_path, :method => "get" %>
+  <%= form_tag url: checkout_path, method: :get do |f| %>
+    <%= f.button 'Checkout' %>
+  <% end %>
+<% end %>

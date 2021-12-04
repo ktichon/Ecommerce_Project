@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   resources :authors, only: [:index, :show]
   resources :cart, only: [:create, :update, :destroy]
 
+  scope "/checkout" do
+    post "create",  to: "checkout#create",  as: "checkout_create"
+    get  "success", to: "checkout#success", as: "checkout_success"
+    get  "cancel",  to: "checkout#cancel",  as: "checkout_cancel"
+  end
+
+  get "/checkout", to: "checkout#index"
   get "/cart", to: "cart#index"
 
   get "info_pages/:permalink" => "info_pages#permalink", as: "permalink"
