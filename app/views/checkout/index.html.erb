@@ -1,0 +1,53 @@
+<% content_for :title, "Checkout" %>
+<h2>Total: <%= number_to_currency cart[0] %></h2>
+<% cart[1].each do |bookInCart| %>
+  <p><%= bookInCart[1]%>x <%= link_to bookInCart[0].name, bookInCart[0] %></p>
+<% end %>
+
+<%= form_with url: checkout_create_path,  method: :post, remote: true do |f| %>
+
+  <% if current_user %>
+     <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autocomplete: "email", value: current_user.email %>
+      </div>
+
+      <div class="field">
+        <%= f.label :province_id %><br />
+        <%= f.collection_select( :province_id, Province.order(:name),:id,:name, {:selected => current_user.province_id} )%>
+      </div>
+      <div class="field">
+        <%= f.label :address %><br />
+        <%= f.text_field(:address, value: current_user.address )%>
+      </div>
+
+      <div class="field">
+        <%= f.label :postal %><br />
+        <%= f.text_field(:postal, value: current_user.postal) %>
+      </div>
+  <% else %>
+    <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :province_id %><br />
+        <%= f.collection_select :province_id, Province.order(:name),:id,:name, include_blank: true %>
+      </div>
+      <div class="field">
+        <%= f.label :address %><br />
+        <%= f.text_field :address, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :postal %><br />
+        <%= f.text_field :postal, autofocus: true %>
+      </div>
+  <% end %>
+
+
+  <div class="actions">
+    <%= f.submit "Confirm Payment" %>
+  </div>
+<% end %>
