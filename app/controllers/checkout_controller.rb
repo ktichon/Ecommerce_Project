@@ -1,21 +1,22 @@
 class CheckoutController < ApplicationController
 
-  def index
-    if current_user
-      province = Province.find(current_user.province_id)
-      @povince_name = province.name
-    end
-
-  end
-
-  def create
+  def invoice
     province = Province.find(params[:province_id])
-    customer = province.customers.create(address: params[:address], postal_code: params[:postal], email: params[:email])
-    if customer.invalid?
+    @customer = province.customers.create(address: params[:address], postal_code: params[:postal], email: params[:email])
+    if @customer.invalid?
       flash[:notice] = "Please ensure that all fields are vaild"
       redirect_back fallback_location: root_path
       return
     end
+    @PST = cart[0] * province.PST
+    @GST = cart[0] * province.GST
+    @HST = cart[0] * province.HST
+  end
+
+  def create
+    customer = Customer.find(params[:customer_id])
+    province = customer.province
+
     total_after_tax = cart[0] + cart[0] * province.PST + cart[0] * province.GST + cart[0] * province.HST
     order = customer.orders.create(status: "New", PST: province.PST, GST: province.GST, HST: province.HST, total: total_after_tax)
     line_items = []
@@ -35,7 +36,7 @@ class CheckoutController < ApplicationController
 
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ["card"],
-      success_url:          checkout_success_url,
+      success_url:          checkout_success_url ,
       cancel_url:           checkout_cancel_url,
       line_items:           line_items,
       customer_email:       params[:email]
@@ -52,6 +53,8 @@ class CheckoutController < ApplicationController
   end
 
   def succes
+    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
     #got money
   end
 

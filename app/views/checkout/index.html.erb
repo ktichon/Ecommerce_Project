@@ -4,7 +4,7 @@
   <p><%= bookInCart[1]%>x <%= link_to bookInCart[0].name, bookInCart[0] %></p>
 <% end %>
 
-<%= form_with url: checkout_create_path,  method: :post, remote: true do |f| %>
+<%= form_with url: checkout_invoice_path,  method: :post do |f| %>
 
   <% if current_user %>
      <div class="field">
@@ -48,6 +48,6 @@
 
 
   <div class="actions">
-    <%= f.submit "Confirm Payment" %>
+    <%= f.submit "Continue" %>
   </div>
 <% end %>

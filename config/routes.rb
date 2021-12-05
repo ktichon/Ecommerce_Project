@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   scope "/checkout" do
     post "create",  to: "checkout#create",  as: "checkout_create"
+    post "invoice", to: "checkout#invoice", as: "checkout_invoice"
     get  "success", to: "checkout#success", as: "checkout_success"
     get  "cancel",  to: "checkout#cancel",  as: "checkout_cancel"
   end
