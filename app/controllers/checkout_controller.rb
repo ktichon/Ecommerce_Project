@@ -31,20 +31,22 @@ class CheckoutController < ApplicationController
       line_items << {name: "PST", description: "Provincial Sales Tax", amount: (cart[0] * province.PST * 100).to_i , quantity: 1, currency: "cad" }
     end
     if province.HST > 0
-      line_items << {name: "PST", description: "Harmonized Sales Tax", amount: (cart[0] * province.HST * 100).to_i , quantity: 1, currency: "cad" }
+      line_items << {name: "HST", description: "Harmonized Sales Tax", amount: (cart[0] * province.HST * 100).to_i , quantity: 1, currency: "cad" }
     end
+    set_up_cart()
+
 
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ["card"],
-      success_url:          checkout_success_url ,
-      cancel_url:           checkout_cancel_url,
+      success_url:          checkout_success_url + "?session_id={CHECKOUT_SESSION_ID}&order_id=#{order.id}",
+      cancel_url:           checkout_cancel_url + "?order_id=#{order.id}",
       line_items:           line_items,
       customer_email:       params[:email]
     )
 
-    respond_to do |format|
-      format.js # render app/views/checkout/create.js.erb
-    end
+    redirect_to @session.url.to_s
+
+
 
 
     #connects to strip
@@ -53,13 +55,18 @@ class CheckoutController < ApplicationController
   end
 
   def succes
+    #got money
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
-    #got money
+    @order = Order.find(params[:order_id])
+    @order.status = "Paid"
+
   end
 
   def cancel
-    #error
+    @order = Order.find(params[:order_id])
+    @order.status = "Payment Error"
+
 
   end
 end
