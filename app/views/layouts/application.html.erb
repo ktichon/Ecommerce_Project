@@ -14,7 +14,7 @@
 
   <body>
     <h1><%= yield(:title) %></h1>
-    <%= render partial: 'common/menu'%>
+    <%= render partial: 'common/menu' %>
     <%= yield %>
     <% if flash[:notice] %>
       <p><%= flash[:notice] %></p>

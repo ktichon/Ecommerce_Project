@@ -1,0 +1,33 @@
+<% content_for :title, "Invoice" %>
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </tr>
+  <% cart[1].each do |bookInCart| %>
+    <tr>
+      <td><%= link_to bookInCart[0].name, bookInCart[0] %></td>
+      <td><%= bookInCart[1]%></td>
+      <td><%= bookInCart[0].cost %></td>
+    </tr>
+  <% end %>
+  <tr> <td>Subtotal</td> <td></td> <td><%= number_to_currency cart[0]%></td> </tr>
+  <% if @PST > 0 %>
+    <tr> <td>PST</td> <td></td> <td><%= number_to_currency @PST%></td> </tr>
+  <% end %>
+  <% if @GST > 0 %>
+    <tr> <td>GST</td> <td></td> <td><%= number_to_currency @GST%></td> </tr>
+  <% end %>
+  <% if @HST > 0 %>
+    <tr> <td>HST</td> <td></td> <td><%= number_to_currency @HST%></td> </tr>
+  <% end %>
+  <tr> <td>Total</td> <td></td> <td><%= number_to_currency (cart[0] + @PST + @HST + @GST)%></td> </tr>
+</table>
+
+<%= form_with url: checkout_create_path,  method: :post, remote: true do |f| %>
+  <%=  hidden_field_tag(:customer_id, @customer.id)%>
+  <div class="actions">
+    <%= f.submit "Confirm Payment" %>
+  </div>
+<% end %>
