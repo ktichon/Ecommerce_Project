@@ -3,7 +3,7 @@
 <% cart[1].each do |bookInCart| %>
   <%= form_with url: cart_path(bookInCart[0]), method: :patch  do |f| %>
     <%= f.hidden_field :id, value: bookInCart[0].id%>
-    <%= f.label nil, "#{link_to bookInCart[0].name, bookInCart[0] }".html_safe %>
+    <%= link_to bookInCart[0].name, bookInCart[0] %>
     <%= f.label :amount, "#" %>
     <%= f.number_field :amount, value: bookInCart[1] , in: 1..100, step: 1  %>
     <%= f.submit 'Update' %>

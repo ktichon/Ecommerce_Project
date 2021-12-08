@@ -11,7 +11,7 @@ class BooksController < ApplicationController
     @keywords = params[:keywords]
     @genre = params[:type]
     wildcardSearch = "%#{@keywords}%"
-    books = Book.includes(:author).includes(:genres).where("name LIKE ? ", wildcardSearch)
+    books = Book.includes(image_blob: { attachments: :blob }).includes(:author).includes(:genres).where("name LIKE ? ", wildcardSearch)
     if  params[:type] != "All"
       genres = Genre.find_by(genre_name: @genre)
       books = books.joins(:book_genres).where("books.id = book_genres.book_id").where("book_genres.genre_id = ?", genres.id)

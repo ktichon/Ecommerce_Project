@@ -7,12 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 BookInOrder.delete_all
 Order.delete_all
-Province.delete_all
+User.delete_all
 Customer.delete_all
 BookGenre.delete_all
 Book.delete_all
 Author.delete_all
 Genre.delete_all
+Province.delete_all
 ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
 
 
@@ -73,7 +74,7 @@ NUMBER_OF_AUTHORS.times do
     query = URI.encode_www_form_component(realBookTitle)
     downloaded_image = URI.open("https://source.unsplash.com/300x300/?#{query}")
     newBook.image.attach(io: downloaded_image, filename: "m-#{booktitle}.jpg")
-    sleep 0.1
+    sleep 1
 
 
   end

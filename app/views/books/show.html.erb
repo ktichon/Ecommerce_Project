@@ -1,11 +1,6 @@
 <% content_for :title, @book.name %>
-<%= render @book%>
-<p><%= simple_format(@book.description) %> </p>
-<%= form_with  url: cart_index_path, method: :post do %>
-  <%= hidden_field_tag(:id, @book.id) %>
-  <%= label(:amount, "#")%>
-  <%=button_tag(name: 'amount', type: 'submit', value: 1)%>
-<% end %>
+<%= render @book, size: 600 %>
+<%= simple_format(@book.description) %>
 <%= form_with url: cart_index_path, method: :post  do |f| %>
   <%= f.hidden_field :id, value: @book.id%>
   <%= f.label :amount, "#" %>

@@ -10,12 +10,12 @@
 
   <div class="field">
     <%= f.label :address %><br />
-    <%= f.text_field :address, autofocus: true %>
+    <%= f.text_field :address %>
   </div>
 
   <div class="field">
     <%= f.label :postal %><br />
-    <%= f.text_field :postal, autofocus: true %>
+    <%= f.text_field :postal %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -48,6 +48,6 @@
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p> Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %> </p>
 
 <%= link_to "Back", :back %>

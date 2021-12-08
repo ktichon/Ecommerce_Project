@@ -2,11 +2,12 @@
 <div class= "container">
 
   <div class= "row">
-    <%= render @books%>
+    <%= render @books, size: 200 %>
   </div>
+
   <div class= "row">
     <%= paginate @books %>
-  <div>
+  </div>
 
 </div>
 
