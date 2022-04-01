@@ -1,3 +1,8 @@
 <% content_for :title, @genre.genre_name %>
-<%= render partial: @genre.books, size: 200 %>
+
+<div class= "row">
+  <%= render  @genre.books, size: 200 %>
+</div>
+
+
 

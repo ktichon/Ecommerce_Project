@@ -1,5 +1,7 @@
 <% content_for :title, @author.name %>
 <p><%= @author.info %> </p>
 <h3>Books</h3>
-<%= render partial: @author.books, size: 200 %>
 
+<div class= "row">
+    <%= render @author.books, size: 200 %>
+</div>

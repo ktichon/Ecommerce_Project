@@ -26,8 +26,8 @@ province_list.each do |province|
 end
 
 Faker::UniqueGenerator.clear
-NUMBER_OF_AUTHORS = 70
-bookArray = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,4,11]
+NUMBER_OF_AUTHORS = 75
+bookArray = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,4,5]
 NUMBER_OF_CATEGORIES = 10
 category_array = []
 genre_odds = [1,1,1,2]

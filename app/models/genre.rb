@@ -6,4 +6,5 @@ class Genre < ApplicationRecord
   def to_s
     genre_name
   end
+  paginates_per 25
 end

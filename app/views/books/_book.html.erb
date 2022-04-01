@@ -1,17 +1,20 @@
-<div class="book">
-  <h5><%= link_to book.name, book %></h5>
-  <% if book.image.present? %>
-    <figure class="image">
-          <%= image_tag book.image.variant(resize_to_limit: [size, (size + size * 0.33).to_i ]).processed, alt: book.name  %>
-  </figure>
-  <% end %>
-
-  <p class="text-right">by <%= link_to book.author.name, book.author %></p>
-  <p><%= number_to_currency book.cost %></p>
-  <p>
-    <% book.genres.each do |genre| %>
-      <%= link_to genre.genre_name, genre%>
-      <%= " "%>
+<div class="col-md-3">
+  <div class= "book border rounded">
+    <% if book.image.present? %>
+      <figure class="image">
+            <%= image_tag book.image.variant(resize_to_limit: [size, (size + size * 0.33).to_i ]).processed, alt: book.name  %>
+    </figure>
     <% end %>
-  </p>
+    <h3><%= link_to book.name, book %></h3>
+    <p class="text-right">by <%= link_to book.author.name, book.author %></p>
+    <p><%= number_to_currency book.cost %></p>
+    <p>
+      <% book.genres.each do |genre| %>
+        <%= link_to genre.genre_name, genre%>
+        <%= " "%>
+      <% end %>
+    </p>
+  </div>
+
+
 </div>

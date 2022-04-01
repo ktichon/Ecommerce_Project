@@ -9,7 +9,7 @@ class CheckoutController < ApplicationController
       return
     end
     @PST = cart[0] * province.PST
-    @GST = cart[0] * province.GST
+    @GST = cart[0] * province.GST-
     @HST = cart[0] * province.HST
   end
 

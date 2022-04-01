@@ -1,14 +1,11 @@
 <% content_for :title, "Books" %>
-<div class= "container">
 
-  <div class= "row">
-    <%= render @books, size: 200 %>
-  </div>
+<div class= "row">
+  <%= render @books, size: 250 %>
+</div>
 
-  <div class= "row">
-    <%= paginate @books %>
-  </div>
-
+<div class= "row">
+  <%= paginate @books %>
 </div>
 
 
