@@ -66,3 +66,8 @@ gem 'kaminari', :git => 'https://github.com/kaminari/kaminari.git', :branch => '
 gem 'bootstrap', :git => 'https://github.com/twbs/bootstrap-rubygem.git', :branch => 'master'
 gem 'jquery-rails'
 gem'image_processing'
+gem 'bootstrap-sass'
+gem 'bootstrap-cdn-rails'
+gem 'jsbundling-rails'  # needed for bootstrap javascript
+gem 'cssbundling-rails' # Install bootstrap 5
+gem 'sprockets-rails', :require => 'sprockets/railtie'
